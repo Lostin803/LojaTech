@@ -6,7 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LojaTech - Sua Loja de Tecnologias</title>
     <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css"> 
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bitcount+Grid+Double:wght@100..900&display=swap"
+        rel="stylesheet">
+
 </head>
 
 <body>
@@ -28,10 +32,12 @@
 
     <div class="container">
         <div id="homeSection">
-            <div class="search-bar">
+            <div class="search-expand">
                 <input id="searchInput" type="text" placeholder="Busque por produtos, marcas..."
-                    oninput="buscarProduto()">
-                <button onclick="buscarProduto()">Buscar</button>
+                    oninput="buscarProduto()" />
+                <button onclick="buscarProduto()" aria-label="Buscar">
+                    <span class="lupa">&#128269;</span>
+                </button>
             </div>
             <div class="category-bar">
                 <button class="category-btn active" onclick="filterCategory('all', this)">Todos</button>
