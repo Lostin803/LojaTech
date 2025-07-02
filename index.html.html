@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Loja Fashion</title>
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:700,400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1e1e2f;
+            --accent: #ff5a5f;
+            --bg: #f7f7fa;
+            --text: #222;
+            --card: #fff;
+            --shadow: 0 4px 24px rgba(30,30,47,0.08);
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: 'Montserrat', Arial, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+        }
+        header {
+            background: var(--primary);
+            color: #fff;
+            padding: 32px 0 24px 0;
+            text-align: center;
+            box-shadow: var(--shadow);
+        }
+        header h1 {
+            font-size: 2.5rem;
+            letter-spacing: 2px;
+            margin-bottom: 8px;
+        }
+        header p {
+            font-size: 1.1rem;
+            color: #ccc;
+        }
+        nav {
+            margin-top: 16px;
+        }
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            margin: 0 18px;
+            font-weight: 700;
+            transition: color 0.2s;
+            cursor: pointer;
+        }
+        nav a:hover {
+            color: var(--accent);
+        }
+        main {
+            max-width: 1200px;
+            margin: 40px auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 32px;
+            padding: 0 24px;
+        }
+        .card {
+            background: var(--card);
+            border-radius: 18px;
+            box-shadow: var(--shadow);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.2s;
+        }
+        .card:hover {
+            transform: translateY(-8px) scale(1.03);
+            box-shadow: 0 8px 32px rgba(30,30,47,0.14);
+        }
+        .card img {
+            width: 100%;
+            height: 260px;
+            object-fit: cover;
+        }
+        .card-body {
+            padding: 20px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .card-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+        .card-desc {
+            font-size: 0.98rem;
+            color: #666;
+            margin-bottom: 16px;
+        }
+        .card-price {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--accent);
+            margin-bottom: 12px;
+        }
+        .btn {
+            background: var(--accent);
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            padding: 10px 0;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .btn:hover {
+            background: #e14b50;
+        }
+        .cart-modal-bg {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(30,30,47,0.18);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+        .cart-modal {
+            background: #fff;
+            border-radius: 16px;
+            box-shadow: var(--shadow);
+            padding: 32px 24px 24px 24px;
+            min-width: 320px;
+            max-width: 90vw;
+            max-height: 80vh;
+            overflow-y: auto;
+            position: relative;
+        }
+        .cart-modal h2 {
+            margin-bottom: 18px;
+            font-size: 1.3rem;
+        }
+        .cart-items {
+            margin-bottom: 18px;
+        }
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+            font-size: 1rem;
+        }
+        .cart-item-title {
+            flex: 1;
+        }
+        .cart-item-qty {
+            margin: 0 8px;
+        }
+        .cart-total {
+            font-weight: 700;
+            margin-bottom: 18px;
+        }
+        .cart-close {
+            position: absolute;
+            top: 12px;
+            right: 18px;
+            background: none;
+            border: none;
+            font-size: 1.3rem;
+            color: #888;
+            cursor: pointer;
+        }
+        .cart-btn {
+            position: fixed;
+            top: 24px;
+            right: 24px;
+            background: var(--accent);
+            color: #fff;
+            border: none;
+            border-radius: 50%;
+            width: 48px;
+            height: 48px;
+            font-size: 1.5rem;
+            box-shadow: var(--shadow);
+            cursor: pointer;
+            z-index: 1001;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .cart-btn-badge {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            background: #fff;
+            color: var(--accent);
+            border-radius: 50%;
+            font-size: 0.85rem;
+            font-weight: 700;
+            padding: 2px 7px;
+            min-width: 22px;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(30,30,47,0.12);
+        }
+        footer {
+            text-align: center;
+            padding: 32px 0 16px 0;
+            color: #888;
+            font-size: 0.98rem;
+            background: #fff;
+            margin-top: 48px;
+            box-shadow: 0 -2px 12px rgba(30,30,47,0.04);
+        }
+        @media (max-width: 600px) {
+            header h1 { font-size: 1.5rem; }
+            main { gap: 18px; }
+            /* Player de música ambiente fixo no rodapé */
+            .music-player {
+                position: fixed;
+                left: 50%;
+                bottom: 18px;
+                transform: translateX(-50%);
+                background: #fff;
+                border-radius: 24px;
+                box-shadow: 0 2px 12px rgba(30,30,47,0.10);
+                display: flex;
+                align-items: center;
+                padding: 8px 18px 8px 12px;
+                z-index: 1200;
+                min-width: 220px;
+                max-width: 90vw;
+                gap: 10px;
+            }
+            .music-player button {
+                background: var(--accent);
+                border: none;
+                color: #fff;
+                border-radius: 50%;
+                width: 36px;
+                height: 36px;
+                font-size: 1.2rem;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                cursor: pointer;
+                transition: background 0.2s;
+            }
+            .music-player button:hover {
+                background: #e14b50;
+            }
+            .music-player span {
+                font-size: 1rem;
+                color: var(--primary);
+                margin-left: 8px;
+                margin-right: 8px;
+                white-space: nowrap;
+            }
+            .music-player input[type="range"] {
+                width: 80px;
+                accent-color: var(--accent);
+            }
+            @media (max-width: 600px) {
+                .music-player { min-width: 0; padding: 6px 8px; font-size: 0.95rem; }
+                .music-player span { font-size: 0.95rem; }
+                .music-player input[type="range"] { width: 50px; }
+            }
+            .card img { height: 180px; }
+            .cart-modal { min-width: 90vw; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Loja Fashion</h1>
+        <p>Moda moderna, looks incríveis para você!</p>
+        <nav>
+            <a href="#" data-filter="all">Início</a>
+            <a href="#" data-filter="masculino">Masculino</a>
+            <a href="#" data-filter="feminino">Feminino</a>
+            <a href="#" data-filter="acessorios">Acessórios</a>
+            <a href="#" data-filter="contato">Contato</a>
+        </nav>
+        <!-- Player de música ambiente funcional -->
+        <div class="music-player" id="musicPlayer" style="margin: 0 auto; margin-top: 18px; max-width: 340px;">
+            <button id="musicPlayPause" title="Tocar/Pausar">▶️</button>
+            <span id="musicTitle">Música ambiente</span>
+            <input type="range" id="musicVolume" min="0" max="1" step="0.01" value="0.5" title="Volume">
+        </div>
+        <audio id="musicAudio" loop>
+            <source src="site html/midia/jazz-elevator-music.mp3" type="audio/mpeg">
+            Seu navegador não suporta áudio HTML5.
+        </audio>
+        <script>
+        // Player de música ambiente
+        const musicAudio = document.getElementById('musicAudio');
+        const musicPlayPause = document.getElementById('musicPlayPause');
+        const musicVolume = document.getElementById('musicVolume');
+        const musicTitle = document.getElementById('musicTitle');
+
+        // Nome da música (opcional)
+        musicTitle.textContent = "Música ambiente";
+
+        // Play/Pause
+        let isPlaying = false;
+        musicPlayPause.addEventListener('click', () => {
+            if (isPlaying) {
+                musicAudio.pause();
+            } else {
+                // Tenta tocar o áudio após interação do usuário
+            musicAudio.play().then(() => {
+                // Sucesso ao tocar
+            }).catch((err) => {
+                // Alguns navegadores bloqueiam autoplay, tente forçar play novamente
+                musicAudio.muted = false;
+                musicAudio.volume = musicVolume.value;
+                setTimeout(() => {
+                    musicAudio.play().catch(() => {
+                        alert('Clique novamente para permitir o áudio.');
+                    });
+                }, 100);
+                return;
+            });
+        }
+        isPlaying = !isPlaying;
+    });
+
+    // Atualiza o botão ao carregar a página
+    musicAudio.addEventListener('loadeddata', () => {
+        musicPlayPause.textContent = isPlaying ? '⏸️' : '▶️';
+    });
+        // Troque a fonte do áudio para uma música de elevador livre de direitos autorais
+        musicAudio.querySelector('source').src = "site html/midia/jazz-elevator-music.mp3";
+        musicAudio.load();
+
+        musicAudio.addEventListener('play', () => {
+            isPlaying = true;
+            musicPlayPause.textContent = '⏸️';
+        });
+        musicAudio.addEventListener('pause', () => {
+            isPlaying = false;
+            musicPlayPause.textContent = '▶️';
+        });
+
+        // Volume
+        musicAudio.volume = musicVolume.value;
+        musicVolume.addEventListener('input', () => {
+            musicAudio.volume = musicVolume.value;
+        });
+        </script>
+    </header>
+    <button class="cart-btn" id="cartBtn" title="Ver carrinho">
+        🛒
+        <span class="cart-btn-badge" id="cartCount">0</span>
+    </button>
+    <main id="products">
+        <!-- Os produtos serão renderizados pelo JS -->
+    </main>
+    <div class="cart-modal-bg" id="cartModalBg">
+        <div class="cart-modal">
+            <button class="cart-close" id="closeCart" title="Fechar">&times;</button>
+            <h2>Carrinho de Compras</h2>
+            <div class="cart-items" id="cartItems"></div>
+            <div class="cart-total" id="cartTotal"></div>
+            <button class="btn" id="checkoutBtn">Finalizar Compra</button>
+        </div>
+    </div>
+    <footer>
+        &copy; 2024 Loja Fashion. Todos os direitos reservados.
+    </footer>
+    <script>
+    // Produtos da loja
+    const products = [
+        {
+            id: 1,
+            title: "Camiseta Básica",
+            desc: "Conforto e estilo para o dia a dia. Disponível em várias cores.",
+            price: 49.90,
+            img: "https://images.unsplash.com/photo-1512436991641-6745cdb1723f?auto=format&fit=crop&w=600&q=80",
+            category: "masculino"
+        },
+        {
+            id: 2,
+            title: "Vestido Floral",
+            desc: "Leve, elegante e perfeito para o verão.",
+            price: 89.90,
+            img: "https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?auto=format&fit=crop&w=600&q=80",
+            category: "feminino"
+        },
+        {
+            id: 3,
+            title: "Jaqueta Jeans",
+            desc: "Clássica e atemporal, combina com tudo.",
+            price: 129.90,
+            img: "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=600&q=80",
+            category: "masculino"
+        },
+        {
+            id: 4,
+            title: "Calça Skinny",
+            desc: "Modelagem perfeita e tecido confortável.",
+            price: 99.90,
+            img: "https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?auto=format&fit=crop&w=600&q=80",
+            category: "feminino"
+        },
+        {
+            id: 5,
+            title: "Óculos de Sol",
+            desc: "Proteção e estilo para qualquer ocasião.",
+            price: 59.90,
+            img: "https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=600&q=80",
+            category: "acessorios"
+        },
+        {
+            id: 6,
+            title: "Bolsa Casual",
+            desc: "Prática e moderna, ideal para o dia a dia.",
+            price: 79.90,
+            img: "https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?auto=format&fit=crop&w=600&q=80",
+            category: "acessorios"
+        }
+    ];
+
+    // Carrinho de compras
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+    // Renderiza os produtos
+    function renderProducts(filter = "all") {
+        const main = document.getElementById('products');
+        main.innerHTML = '';
+        let filtered = products;
+        if (filter !== "all") {
+            filtered = products.filter(p => p.category === filter);
+        }
+        if (filter === "contato") {
+            main.innerHTML = `<div style="grid-column: 1/-1; text-align:center; padding:48px 0;">
+                <h2>Contato</h2>
+                <p>Envie um e-mail para <a href="mailto:contato@lojafashion.com">contato@lojafashion.com</a> ou ligue para (11) 99999-9999.</p>
+            </div>`;
+            return;
+        }
+        filtered.forEach(prod => {
+            main.innerHTML += `
+            <div class="card">
+                <img src="${prod.img}" alt="${prod.title}">
+                <div class="card-body">
+                    <div>
+                        <div class="card-title">${prod.title}</div>
+                        <div class="card-desc">${prod.desc}</div>
+                    </div>
+                    <div>
+                        <div class="card-price">R$ ${prod.price.toFixed(2).replace('.', ',')}</div>
+                        <button class="btn" data-id="${prod.id}">Comprar</button>
+                    </div>
+                </div>
+            </div>
+            `;
+        });
+    }
+
+    // Atualiza o contador do carrinho
+    function updateCartCount() {
+        document.getElementById('cartCount').textContent = cart.reduce((sum, item) => sum + item.qty, 0);
+    }
+
+    // Salva o carrinho no localStorage
+    function saveCart() {
+        localStorage.setItem('cart', JSON.stringify(cart));
+    }
+
+    // Adiciona produto ao carrinho
+    function addToCart(id) {
+        const prod = products.find(p => p.id === id);
+        if (!prod) return;
+        const idx = cart.findIndex(item => item.id === id);
+        if (idx > -1) {
+            cart[idx].qty += 1;
+        } else {
+            cart.push({ id: prod.id, title: prod.title, price: prod.price, qty: 1 });
+        }
+        saveCart();
+        updateCartCount();
+        showCartModal();
+    }
+
+    // Remove produto do carrinho
+    function removeFromCart(id) {
+        cart = cart.filter(item => item.id !== id);
+        saveCart();
+        updateCartCount();
+        renderCart();
+    }
+
+    // Altera quantidade de produto no carrinho
+    function changeQty(id, delta) {
+        const idx = cart.findIndex(item => item.id === id);
+        if (idx > -1) {
+            cart[idx].qty += delta;
+            if (cart[idx].qty < 1) cart[idx].qty = 1;
+            saveCart();
+            updateCartCount();
+            renderCart();
+        }
+    }
+
+    // Renderiza o carrinho
+    function renderCart() {
+        const cartItems = document.getElementById('cartItems');
+        const cartTotal = document.getElementById('cartTotal');
+        if (cart.length === 0) {
+            cartItems.innerHTML = '<p>Seu carrinho está vazio.</p>';
+            cartTotal.textContent = '';
+            return;
+        }
+        cartItems.innerHTML = '';
+        cart.forEach(item => {
+            cartItems.innerHTML += `
+                <div class="cart-item">
+                    <span class="cart-item-title">${item.title}</span>
+                    <button class="btn" style="padding:2px 8px;font-size:1.1rem;" data-action="dec" data-id="${item.id}">-</button>
+                    <span class="cart-item-qty">${item.qty}</span>
+                    <button class="btn" style="padding:2px 8px;font-size:1.1rem;" data-action="inc" data-id="${item.id}">+</button>
+                    <span style="margin-left:12px;">R$ ${(item.price * item.qty).toFixed(2).replace('.', ',')}</span>
+                    <button class="btn" style="padding:2px 8px;font-size:1.1rem;background:#eee;color:#c00;margin-left:10px;" data-action="remove" data-id="${item.id}">&times;</button>
+                </div>
+            `;
+        });
+        const total = cart.reduce((sum, item) => sum + item.price * item.qty, 0);
+        cartTotal.textContent = `Total: R$ ${total.toFixed(2).replace('.', ',')}`;
+    }
+
+    // Mostra o modal do carrinho
+    function showCartModal() {
+        document.getElementById('cartModalBg').style.display = 'flex';
+        renderCart();
+    }
+
+    // Fecha o modal do carrinho
+    function closeCartModal() {
+        document.getElementById('cartModalBg').style.display = 'none';
+    }
+
+    // Eventos
+    document.addEventListener('DOMContentLoaded', () => {
+        renderProducts();
+        updateCartCount();
+
+        // Comprar
+        document.getElementById('products').addEventListener('click', e => {
+            if (e.target.classList.contains('btn') && e.target.dataset.id) {
+                addToCart(Number(e.target.dataset.id));
+            }
+        });
+
+        // Filtros do menu
+        document.querySelectorAll('nav a').forEach(link => {
+            link.addEventListener('click', e => {
+                e.preventDefault();
+                const filter = link.dataset.filter;
+                renderProducts(filter);
+            });
+        });
+
+        // Carrinho
+        document.getElementById('cartBtn').addEventListener('click', showCartModal);
+        document.getElementById('closeCart').addEventListener('click', closeCartModal);
+        document.getElementById('cartModalBg').addEventListener('click', e => {
+            if (e.target === document.getElementById('cartModalBg')) closeCartModal();
+        });
+
+        // Ações no carrinho
+        document.getElementById('cartItems').addEventListener('click', e => {
+            const id = Number(e.target.dataset.id);
+            if (e.target.dataset.action === 'inc') changeQty(id, 1);
+            if (e.target.dataset.action === 'dec') changeQty(id, -1);
+            if (e.target.dataset.action === 'remove') removeFromCart(id);
+        });
+
+        // Finalizar compra
+        document.getElementById('checkoutBtn').addEventListener('click', () => {
+            if (cart.length === 0) return;
+            alert('Compra finalizada! Obrigado por comprar na Loja Fashion.');
+            cart = [];
+            saveCart();
+            updateCartCount();
+            renderCart();
+            closeCartModal();
+        });
+    });
+    </script>
+</body>
+</html>
