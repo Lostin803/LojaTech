@@ -50,7 +50,7 @@
 
  /* Efeito de borda neon no header e logo */
  header {
-     box-shadow: 0 0 16px 2px #ff6600, 0 2px 16px rgba(0, 0, 0, 0.10);
+     box-shadow: 0 0 16px 2px rgb(196, 112, 16), 0 2px 16px rgba(0, 0, 0, 0.10);
      border-bottom: 4px solid #fff;
      position: relative;
      z-index: 10;
@@ -60,7 +60,7 @@
      font-family: "Bitcount Grid Double", system-ui;
      color: #fff;
      text-shadow:
-         0 0 8px #f8ae7c,
+         0 0 8px #b48269,
          0 0 16px #f7d3bc,
          2px 2px 0 #fff,
          4px 4px 0 #222;
@@ -556,7 +556,3 @@
  .search-expand:focus-within input {
      width: 300px;
  }
-    .search-expand:hover button,
-    .search-expand:focus-within button {
-        color: #793de9;
-    }
