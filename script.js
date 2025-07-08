@@ -356,53 +356,46 @@ function filterCategory(cat, btn, onlyCategoriesSection) {
 function adicionarCarrinho(id) {
   const prod = produtos.find((p) => p.id === id);
   const idx = carrinho.findIndex((item) => item.id === id);
-  if (idx > -1) {
-    carrinho[idx].qty += 1;
-  } else {
-    carrinho.push({ ...prod, qty: 1 });
-  }
+  idx > -1 ? (carrinho[idx].qty += 1) : carrinho.push({ ...prod, qty: 1 });
   atualizarCarrinho();
   openCart();
+  mostrarMensagem("Produto adicionado ao carrinho!");
 }
 function atualizarCarrinho() {
-  document.getElementById("cartCount").textContent = carrinho.reduce(
-    (a, b) => a + b.qty,
-    0
-  );
+  document.getElementById("cartCount").textContent = carrinho.reduce((a, b) => a + b.qty, 0);
   const cartItems = document.getElementById("cartItems");
-  cartItems.innerHTML = "";
-  if (carrinho.length === 0) {
-    cartItems.innerHTML =
-      '<div style="text-align:center;color:#888;">Seu carrinho está vazio.</div>';
-  } else {
-    carrinho.forEach((item) => {
-      const div = document.createElement("div");
-      div.className = "cart-item";
-      div.innerHTML = `
-                        <span class="cart-item-title">${item.title}</span>
-                        <button onclick="alterarQtd(${
-                          item.id
-                        },-1)" style="background:none;border:none;font-size:1.2rem;color:var(--primary);cursor:pointer;">-</button>
-                        <span class="cart-item-qty">${item.qty}</span>
-                        <button onclick="alterarQtd(${
-                          item.id
-                        },1)" style="background:none;border:none;font-size:1.2rem;color:var(--primary);cursor:pointer;">+</button>
-                        <span>R$ ${(item.price * item.qty).toLocaleString(
-                          "pt-BR",
-                          { minimumFractionDigits: 2 }
-                        )}</span>
-                        <button onclick="removerItem(${
-                          item.id
-                        })" style="background:none;border:none;color:#c00;font-size:1.2rem;cursor:pointer;">&times;</button>
-                    `;
-      cartItems.appendChild(div);
-    });
-  }
+  cartItems.innerHTML = carrinho.length
+    ? carrinho
+        .map(
+          (item) => `
+        <div class="cart-item">
+          <span class="cart-item-title">${item.title}</span>
+          <button onclick="alterarQtd(${item.id},-1)" style="background:none;border:none;font-size:1.2rem;color:var(--primary);cursor:pointer;">-</button>
+          <span class="cart-item-qty">${item.qty}</span>
+          <button onclick="alterarQtd(${item.id},1)" style="background:none;border:none;font-size:1.2rem;color:var(--primary);cursor:pointer;">+</button>
+          <span>R$ ${(item.price * item.qty).toLocaleString("pt-BR", { minimumFractionDigits: 2 })}</span>
+          <button onclick="removerItem(${item.id})" style="background:none;border:none;color:#c00;font-size:1.2rem;cursor:pointer;">&times;</button>
+        </div>
+      `
+        )
+        .join("")
+    : '<div style="text-align:center;color:#888;">Seu carrinho está vazio.</div>';
   document.getElementById("cartTotal").textContent =
-    "Total: R$ " +
-    carrinho
-      .reduce((a, b) => a + b.price * b.qty, 0)
-      .toLocaleString("pt-BR", { minimumFractionDigits: 2 });
+    "Total: R$ " + carrinho.reduce((a, b) => a + b.price * b.qty, 0).toLocaleString("pt-BR", { minimumFractionDigits: 2 });
+}
+function mostrarMensagem(texto) {
+  const msg = document.createElement("div");
+  msg.className = "success-msg";
+  msg.textContent = texto;
+  document.body.appendChild(msg);
+  setTimeout(() => msg.remove(), 1200);
+}
+function finalizarCompra() {
+  if (carrinho.length === 0) return alert("Seu carrinho está vazio!");
+  alert("Compra finalizada! Obrigado por comprar na LojaTech.");
+  carrinho = [];
+  atualizarCarrinho();
+  closeCart();
 }
 function alterarQtd(id, delta) {
   const idx = carrinho.findIndex((item) => item.id === id);
