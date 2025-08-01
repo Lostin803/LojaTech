@@ -427,11 +427,19 @@ function mostrarMensagem(texto) {
   setTimeout(() => msg.remove(), 1200);
 }
 function finalizarCompra() {
-  if (carrinho.length === 0) return alert("Seu carrinho está vazio!");
-  alert("Compra finalizada! Obrigado por comprar na LojaTech.");
+  if (carrinho.length === 0) {
+    alert("Seu carrinho está vazio!");
+    return;
+  }
   carrinho = [];
   atualizarCarrinho();
   closeCart();
+  // Modal de agradecimento
+  const modal = document.createElement("div");
+  modal.className = "thankyou-modal";
+  modal.textContent = "Obrigado pela preferência! Sua compra foi finalizada com sucesso.";
+  document.body.appendChild(modal);
+  setTimeout(() => modal.remove(), 2200);
 }
 function alterarQtd(id, delta) {
   const idx = carrinho.findIndex((item) => item.id === id);
@@ -452,18 +460,12 @@ function openCart() {
 function closeCart() {
   document.getElementById("cartModal").style.display = "none";
 }
-function finalizarCompra() {
-  if (carrinho.length === 0) {
-    alert("Seu carrinho está vazio!");
-    return;
-  }
-  alert("Compra finalizada! Obrigado por comprar na LojaTech.");
-  carrinho = [];
-  atualizarCarrinho();
-  closeCart();
-}
-
-// Navegação entre seções
+// Fechar ao clicar fora
+window.onclick = function (event) {
+  const modal = document.getElementById("cartModal");
+  if (event.target === modal) closeCart();
+};
+// navegação entre seções
 function showSection(sec, el) {
   event && event.preventDefault();
   document
@@ -506,13 +508,13 @@ function openProductModal(prod) {
       })}</div>
       <p><b>Categoria:</b> ${prod.category}</p>
       <p><b>Marca:</b> ${prod.marca ? prod.marca : "Não informado"}</p>
-     <p><b>Avaliação:</b> ${
-       prod.avaliacao
-         ? "★".repeat(Math.round(prod.avaliacao)) +
-           "☆".repeat(5 - Math.round(prod.avaliacao)) +
-           ` (${prod.avaliacao})`
-         : "Sem avaliação"
-     }</p>
+      <p><b>Avaliação:</b> ${
+        prod.avaliacao
+          ? "★".repeat(Math.round(prod.avaliacao)) +
+            "☆".repeat(5 - Math.round(prod.avaliacao)) +
+            ` (${prod.avaliacao})`
+          : "Sem avaliação"
+      }</p>
       <p><b>Descrição:</b> ${
         prod.descricao ? prod.descricao : "Sem descrição."
       }</p>
@@ -521,13 +523,9 @@ function openProductModal(prod) {
       });closeProductModal()">Adicionar ao Carrinho</button>
   `;
   modal.style.display = "flex";
-  function openProductModal(prod) {
-    // ...código existente...
-    modal.style.display = "flex";
-    setTimeout(() => {
-      modal.querySelector(".close-btn").focus();
-    }, 100);
-  }
+  setTimeout(() => {
+    modal.querySelector(".close-btn").focus();
+  }, 100);
 }
 function closeProductModal() {
   document.getElementById("productModal").style.display = "none";
@@ -575,13 +573,16 @@ function renderProdutosPaginados() {
       <div style="font-size:0.95rem;color:#444;margin-bottom:8px;"><b>Marca:</b> ${
         prod.marca || "-"
       }</div>
-      <div style="font-size:0.95rem;color:#444;margin-bottom:8px;"><b>Avaliação:</b> ${
-        prod.avaliacao
-          ? "★".repeat(Math.round(prod.avaliacao)) +
-            "☆".repeat(5 - Math.round(prod.avaliacao)) +
-            ` (${prod.avaliacao})`
-          : "-"
-      }</div>
+      <div class="rating-stars" title="${prod.avaliacao ? prod.avaliacao + ' de 5' : ''}">
+  ${prod.avaliacao
+    ? '<span style="color:#FFD700;font-size:1.1em;">' +
+      "★".repeat(Math.round(prod.avaliacao)) +
+      '</span><span style="color:#ccc;font-size:1.1em;">' +
+      "★".repeat(5 - Math.round(prod.avaliacao)) +
+      '</span> <span style="color:#888;font-size:0.95em;">(' + prod.avaliacao + ')</span>'
+    : "-"
+  }
+</div>
       <button class="buy-btn">Comprar</button>
     `;
     card.querySelector(".buy-btn").onclick = function (event) {
@@ -598,3 +599,18 @@ document.getElementById("btnProximaPagina").onclick = function () {
 
 // Inicialize mostrando a primeira página ao carregar
 renderProdutosPaginados();
+
+// detectar o scrow do mouse
+let lastScrollY = window.scrollY;
+window.addEventListener("scroll", function () {
+  const header = document.getElementById("mainHeader");
+  if (!header) return;
+  if (window.scrollY > lastScrollY && window.scrollY > 60) {
+    // Descendo: esconde
+    header.classList.add("hide-header");
+  } else {
+    // Subindo: mostra
+    header.classList.remove("hide-header");
+  }
+  lastScrollY = window.scrollY;
+});
