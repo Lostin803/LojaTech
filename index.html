@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LojaTech - Sua Loja de Tecnologias</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bitcount+Grid+Double:wght@100..900&display=swap"
+        rel="stylesheet">
+    <link rel="icon" type="image/png"
+        href="data:image/png;base64,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" />
+    <meta name="description"
+        content="LojaTech - Sua Loja de Tecnologias. Os melhores produtos de informática, games e acessórios.">
+    <meta name="keywords" content="tecnologia, informática, loja, games, acessórios, notebook, gamer, hardware">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glider-js@1/glider.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/glider-js@1/glider.min.js"></script>
+</head>
+
+<body>
+
+    <header class="main-header" id="mainHeader">
+        <div class="header-content">
+            <div class="logo">LojaTech</div>
+            </form>
+            <button class="cart-btn" onclick="openCart()">
+                <span class="cart-icon">&#128722;</span>
+                <span class="cart-count" id="cartCount">0</span>
+                <span class="cart-label">Carrinho</span>
+            </button>
+        </div>
+        <nav class="main-nav">
+            <a href="#" class="active" onclick="showSection('home', this)">Início</a>
+            <a href="#" onclick="showSection('offers', this)">Ofertas</a>
+            <a href="#" onclick="showSection('categories', this)">Categorias</a>
+            <a href="#" onclick="showSection('contact', this)">Contato</a>
+        </nav>
+        <div class="banner-destaque">
+            <span>🔥 FRETE GRÁTIS para todo o Brasil em compras acima de R$ 499!</span>
+        </div>
+    </header>
+
+    <div class="container">
+        <div id="homeSection">
+            <div class="search-expand">
+                <input id="searchInput" type="text" placeholder="Busque por produtos, marcas..."
+                    oninput="buscarProduto()" />
+                <button onclick="buscarProduto()" aria-label="Buscar">
+                    <span class="lupa">&#128269;</span>
+                </button>
+            </div>
+            <div class="category-bar">
+                <button class="category-btn active" onclick="filterCategory('all', this)">Todos</button>
+                <button class="category-btn" onclick="filterCategory('notebooks', this)">Notebooks</button>
+                <button class="category-btn" onclick="filterCategory('perifericos', this)">Periféricos</button>
+                <button class="category-btn" onclick="filterCategory('acessorios', this)">Acessórios</button>
+                <button class="category-btn" onclick="filterCategory('ofertas', this)">Ofertas</button>
+            </div>
+           <div class="carousel-section">
+  <h2>Ofertas em Destaque</h2>
+  <div class="glider-contain">
+    <div class="glider" id="carouselOfertas"></div> 
+    <div role="tablist" class="dots"></div>
+  </div>
+</div>
+            <h2>Destaques</h2>
+            <div class="filter-bar">
+                <label>
+                    <input type="checkbox" id="filterOfertas" onchange="filtrarAvancado()"> Só ofertas
+                </label>
+                <label>
+                    <input type="checkbox" id="filterBemAvaliados" onchange="filtrarAvancado()"> Bem avaliados (4.5+)
+                </label>
+            </div>
+            <div class="products" id="products">
+                <!-- Produtos são inseridos via JS -->
+            </div>
+            <div style="text-align:center; margin: 24px 0;">
+                <button id="btnProximaPagina" class="category-btn">Próximos Produtos</button>
+            </div>
+            <div class="about-section">
+                <h3>Sobre a LojaTech</h3>
+                <p>Somos apaixonados por tecnologia! Na LojaTech você encontra os melhores produtos, preços e
+                    atendimento. Trabalhamos com as principais marcas do mercado e entregamos para todo o Brasil.</p>
+            </div>
+            <div class="faq-section">
+                <h3>Perguntas Frequentes</h3>
+                <div class="faq-q">Como faço para comprar?</div>
+                <div class="faq-a">Basta clicar em "Comprar" no produto desejado e finalizar sua compra no carrinho.
+                </div>
+                <div class="faq-q">Quais formas de pagamento?</div>
+                <div class="faq-a">Aceitamos cartões de crédito, débito, Pix e boleto bancário.</div>
+                <div class="faq-q">Qual o prazo de entrega?</div>
+                <div class="faq-a">O prazo varia conforme sua região. Consulte no carrinho após informar seu CEP.</div>
+            </div>
+        </div>
+        <div id="offersSection" style="display:none;">
+            <h2>Ofertas Especiais</h2>
+            <div class="products" id="offersProducts"></div>
+        </div>
+        <div id="categoriesSection" style="display:none;">
+            <h2>Categorias</h2>
+            <div class="category-bar">
+                <button class="category-btn" onclick="filterCategory('notebooks', this, true)">Notebooks</button>
+                <button class="category-btn" onclick="filterCategory('perifericos', this, true)">Periféricos</button>
+                <button class="category-btn" onclick="filterCategory('acessorios', this, true)">Acessórios</button>
+            </div>
+            <div class="products" id="categoriesProducts"></div>
+        </div>
+        <div id="contactSection" style="display:none;">
+            <h2>Contato</h2>
+            <div class="contact-content" style="max-width:400px;margin:auto;">
+                <form id="contactForm" onsubmit="enviarContato(event)">
+                    <label for="nome">Nome:</label><br>
+                    <input type="text" id="nome" name="nome" required
+                        style="width:100%;padding:8px;margin-bottom:10px;"><br>
+                    <label for="email">E-mail:</label><br>
+                    <input type="email" id="email" name="email" required
+                        style="width:100%;padding:8px;margin-bottom:10px;"><br>
+                    <label for="mensagem">Mensagem:</label><br>
+                    <textarea id="mensagem" name="mensagem" required style="width:100%;padding:8px;margin-bottom:10px;"
+                        rows="4"></textarea><br>
+                    <button type="submit" class="checkout-btn">Enviar</button>
+                </form>
+                <div id="contactMsg" style="margin-top:12px;color:var(--primary);"></div>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+
+</html>
+<!-- Modal Carrinho (fora do header/container!) -->
+<div class="cart-modal" id="cartModal" style="display:none;">
+    <div class="cart-content">
+        <button class="close-btn" onclick="closeCart()">&times;</button>
+        <h3>Seu Carrinho</h3>
+        <div class="cart-items" id="cartItems"></div>
+        <div class="cart-total" id="cartTotal"></div>
+        <button class="checkout-btn" onclick="finalizarCompra()">Finalizar Compra</button>
+    </div>
+</div>
+<!-- Modal Produto -->
+<div class="product-modal" id="productModal" style="display:none;">
+    <div class="product-modal-content" id="productModalContent"></div>
+</div>
+
+<footer>
+    <div class="footer-links">
+        <a href="#">Termos de Uso</a> |
+        <a href="#">Política de Privacidade</a> |
+        <a href="mailto:contato@loja.tech">contato@loja.tech</a>
+    </div>
+    <div class="footer-social">
+        <a href="https://instagram.com" target="_blank" aria-label="Instagram"><img
+                src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/instagram.svg" alt="Instagram"
+                style="width:24px;"></a>
+        <a href="https://facebook.com" target="_blank" aria-label="Facebook"><img
+                src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/facebook.svg" alt="Facebook"
+                style="width:24px;"></a>
+        <a href="https://wa.me/SEUNUMERO" target="_blank" aria-label="WhatsApp"><img
+                src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/whatsapp.svg" alt="WhatsApp"
+                style="width:24px;"></a>
+    </div>
+    <div style="margin-top:8px;">&copy; 2025 LojaTech - Todos os direitos reservados.</div>
+</footer>
