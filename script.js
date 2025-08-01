@@ -16,7 +16,7 @@ const produtos = [
     descricao:
       "O ASUS TUF Gaming F16 é um notebook gamer potente, projetado para oferecer desempenho excepcional em jogos e tarefas pesadas. Equipado com uma placa de vídeo RTX, 16GB de RAM e SSD de 512GB, ele proporciona carregamento rápido e multitarefa fluida. Seu design robusto e resistente, combinado com um sistema de refrigeração eficiente, garante longas horas de jogabilidade sem superaquecimento. Ideal para gamers e profissionais que buscam alto desempenho e durabilidade.",
     marca: "TechBrand",
-    avaliacao: 4.8,
+    avaliacao: 4.8, 
   },
   {
     id: 2,
@@ -28,7 +28,6 @@ const produtos = [
     descricao:
       "O PRO X SUPERLIGHT 2 DEX é um mouse assimétrico de 60 g que apresenta o avançado sensor HERO 2, a robusta tecnologia sem fio LIGHTSPEED e os switches LIGHTFORCE, proporcionando até 95 horas de duração da bateria.",
     marca: "Logitech",
-    avaliacao: 4.9,
   },
   {
     id: 3,
@@ -437,7 +436,8 @@ function finalizarCompra() {
   // Modal de agradecimento
   const modal = document.createElement("div");
   modal.className = "thankyou-modal";
-  modal.textContent = "Obrigado pela preferência! Sua compra foi finalizada com sucesso.";
+  modal.textContent =
+    "Obrigado pela preferência! Sua compra foi finalizada com sucesso.";
   document.body.appendChild(modal);
   setTimeout(() => modal.remove(), 2200);
 }
@@ -573,14 +573,15 @@ function renderProdutosPaginados() {
       <div style="font-size:0.95rem;color:#444;margin-bottom:8px;"><b>Marca:</b> ${
         prod.marca || "-"
       }</div>
-      <div class="rating-stars" title="${prod.avaliacao ? prod.avaliacao + ' de 5' : ''}">
+<div class="rating-stars" title="${prod.avaliacao ? prod.avaliacao + ' de 5' : ''}">
   ${prod.avaliacao
-    ? '<span style="color:#FFD700;font-size:1.1em;">' +
+    ? '<span style="color:#ffb86b;font-size:1.1em;">' +
       "★".repeat(Math.round(prod.avaliacao)) +
-      '</span><span style="color:#ccc;font-size:1.1em;">' +
+      '</span><span style="color:#393552;font-size:1.1em;">' +
       "★".repeat(5 - Math.round(prod.avaliacao)) +
       '</span> <span style="color:#888;font-size:0.95em;">(' + prod.avaliacao + ')</span>'
     : "-"
+    // ...no renderProdutos...
   }
 </div>
       <button class="buy-btn">Comprar</button>
@@ -614,3 +615,50 @@ window.addEventListener("scroll", function () {
   }
   lastScrollY = window.scrollY;
 });
+function renderCarrosselOfertas() {
+  const ofertas = produtos.filter(p => p.oferta);
+  const container = document.getElementById("carouselOfertas");
+  container.innerHTML = ofertas.map(prod => `
+    <div class="product-card" style="position:relative;">
+      <span class="badge-oferta">Oferta</span>
+      <img src="${prod.img}" alt="${prod.title}" loading="lazy">
+      <div class="product-title">${prod.title}</div>
+      <div class="product-price">R$ ${prod.price.toLocaleString("pt-BR", {minimumFractionDigits:2})}</div>
+      <div class="rating-stars" title="${prod.avaliacao ? prod.avaliacao + ' de 5' : ''}">
+        ${prod.avaliacao
+          ? '<span style="color:#ffb86b;font-size:1.1em;">' +
+            "★".repeat(Math.round(prod.avaliacao)) +
+            '</span><span style="color:#393552;font-size:1.1em;">' +
+            "★".repeat(5 - Math.round(prod.avaliacao)) +
+            '</span> <span style="color:#888;font-size:0.95em;">(' + prod.avaliacao + ')</span>'
+          : "-"
+        }
+      </div>
+      <button class="buy-btn" onclick="adicionarCarrinho(${prod.id})">Comprar</button>
+    </div>
+  `).join("");
+
+  // Inicializa o Glider.js
+  if (window.carouselGlider) window.carouselGlider.destroy();
+  window.carouselGlider = new Glider(container, {
+    slidesToShow: 3,
+    slidesToScroll: 1,
+    draggable: true,
+    dots: '.dots',
+    arrows: {
+      prev: '.glider-prev',
+      next: '.glider-next'
+    },
+    responsive: [
+      { breakpoint: 900, settings: { slidesToShow: 2 } },
+      { breakpoint: 600, settings: { slidesToShow: 1 } }
+    ]
+  });
+
+  // Auto-play: avança a cada 4 segundos
+  clearInterval(window.carouselInterval);
+  window.carouselInterval = setInterval(() => {
+    if (window.carouselGlider) window.carouselGlider.scrollItem(window.carouselGlider.getCurrentSlide() + 1);
+  }, 4000);
+}
+renderCarrosselOfertas();
