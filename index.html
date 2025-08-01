@@ -15,31 +15,32 @@
     <meta name="description"
         content="LojaTech - Sua Loja de Tecnologias. Os melhores produtos de informática, games e acessórios.">
     <meta name="keywords" content="tecnologia, informática, loja, games, acessórios, notebook, gamer, hardware">
-
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glider-js@1/glider.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/glider-js@1/glider.min.js"></script>
 </head>
 
 <body>
 
-   <header class="main-header" id="mainHeader">
-  <div class="header-content">
-    <div class="logo">LojaTech</div>
-    </form>
-    <button class="cart-btn" onclick="openCart()">
-      <span class="cart-icon">&#128722;</span>
-      <span class="cart-count" id="cartCount">0</span>
-      <span class="cart-label">Carrinho</span>
-    </button>
-  </div>
-  <nav class="main-nav">
-    <a href="#" class="active" onclick="showSection('home', this)">Início</a>
-    <a href="#" onclick="showSection('offers', this)">Ofertas</a>
-    <a href="#" onclick="showSection('categories', this)">Categorias</a>
-    <a href="#" onclick="showSection('contact', this)">Contato</a>
-  </nav>
-  <div class="banner-destaque">
-  <span>🔥 FRETE GRÁTIS para todo o Brasil em compras acima de R$ 499!</span>
-</div>
-</header>
+    <header class="main-header" id="mainHeader">
+        <div class="header-content">
+            <div class="logo">LojaTech</div>
+            </form>
+            <button class="cart-btn" onclick="openCart()">
+                <span class="cart-icon">&#128722;</span>
+                <span class="cart-count" id="cartCount">0</span>
+                <span class="cart-label">Carrinho</span>
+            </button>
+        </div>
+        <nav class="main-nav">
+            <a href="#" class="active" onclick="showSection('home', this)">Início</a>
+            <a href="#" onclick="showSection('offers', this)">Ofertas</a>
+            <a href="#" onclick="showSection('categories', this)">Categorias</a>
+            <a href="#" onclick="showSection('contact', this)">Contato</a>
+        </nav>
+        <div class="banner-destaque">
+            <span>🔥 FRETE GRÁTIS para todo o Brasil em compras acima de R$ 499!</span>
+        </div>
+    </header>
 
     <div class="container">
         <div id="homeSection">
@@ -57,7 +58,22 @@
                 <button class="category-btn" onclick="filterCategory('acessorios', this)">Acessórios</button>
                 <button class="category-btn" onclick="filterCategory('ofertas', this)">Ofertas</button>
             </div>
+           <div class="carousel-section">
+  <h2>Ofertas em Destaque</h2>
+  <div class="glider-contain">
+    <div class="glider" id="carouselOfertas"></div> 
+    <div role="tablist" class="dots"></div>
+  </div>
+</div>
             <h2>Destaques</h2>
+            <div class="filter-bar">
+                <label>
+                    <input type="checkbox" id="filterOfertas" onchange="filtrarAvancado()"> Só ofertas
+                </label>
+                <label>
+                    <input type="checkbox" id="filterBemAvaliados" onchange="filtrarAvancado()"> Bem avaliados (4.5+)
+                </label>
+            </div>
             <div class="products" id="products">
                 <!-- Produtos são inseridos via JS -->
             </div>
@@ -128,10 +144,25 @@
 </div>
 <!-- Modal Produto -->
 <div class="product-modal" id="productModal" style="display:none;">
-  <div class="product-modal-content" id="productModalContent"></div>
+    <div class="product-modal-content" id="productModalContent"></div>
 </div>
 
 <footer>
-    &copy; 2025 LojaTech - Todos os direitos reservados. | <a href="#" style="color:#fff;text-decoration:underline;"
-        onclick="showSection('contact', this)">Fale conosco</a>
+    <div class="footer-links">
+        <a href="#">Termos de Uso</a> |
+        <a href="#">Política de Privacidade</a> |
+        <a href="mailto:contato@loja.tech">contato@loja.tech</a>
+    </div>
+    <div class="footer-social">
+        <a href="https://instagram.com" target="_blank" aria-label="Instagram"><img
+                src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/instagram.svg" alt="Instagram"
+                style="width:24px;"></a>
+        <a href="https://facebook.com" target="_blank" aria-label="Facebook"><img
+                src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/facebook.svg" alt="Facebook"
+                style="width:24px;"></a>
+        <a href="https://wa.me/SEUNUMERO" target="_blank" aria-label="WhatsApp"><img
+                src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/whatsapp.svg" alt="WhatsApp"
+                style="width:24px;"></a>
+    </div>
+    <div style="margin-top:8px;">&copy; 2025 LojaTech - Todos os direitos reservados.</div>
 </footer>
