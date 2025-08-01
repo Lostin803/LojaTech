@@ -2,15 +2,24 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
 
 :root {
-    --primary: #ffb86b;         /* Laranja Omni */
-    --primary-dark: #ff7f50;    /* Laranja escuro Omni */
-    --bg: #191622;              /* Fundo principal Omni */
-    --bg-light: #232136;        /* Fundo secundário Omni */
-    --text: #e0def4;            /* Texto claro Omni */
-    --card: #232136;            /* Card Omni */
-    --border: #393552;          /* Borda azul escuro Omni */
-    --success: #a3be8c;         /* Verde Omni */
-    --danger: #eb6f92;          /* Vermelho Omni */
+    --primary: #ffb86b;
+    /* Laranja Omni */
+    --primary-dark: #ff7f50;
+    /* Laranja escuro Omni */
+    --bg: #191622;
+    /* Fundo principal Omni */
+    --bg-light: #232136;
+    /* Fundo secundário Omni */
+    --text: #393552;
+    /* Texto claro Omni */
+    --card: #232136;
+    /* Card Omni */
+    --border: #393552;
+    /* Borda azul escuro Omni */
+    --success: #a3be8c;
+    /* Verde Omni */
+    --danger: #eb6f92;
+    /* Vermelho Omni */
     --shadow: 0 2px 16px #0008;
 }
 
@@ -215,8 +224,8 @@ body {
 }
 
 .category-btn {
-    background: #fff;
-    color: var(--primary);
+    background: var(--primary);
+    color: var(--text);
     border: 2px solid var(--primary);
     border-radius: 16px;
     padding: 10px 22px;
@@ -246,7 +255,7 @@ body {
 .product-card {
     background: var(--card);
     border-radius: 14px;
-    box-shadow: 0 2px 12px #0005;
+    box-shadow: 0 2px 12px var(--border);
     padding: 22px 14px 18px 14px;
     text-align: center;
     border: 1.5px solid var(--border);
@@ -257,7 +266,7 @@ body {
 }
 
 .product-card:hover {
-    box-shadow: 0 8px 24px #ff660044, 0 0 16px #ff6600;
+    box-shadow: 0 8px 24px var(--primary-dark), 0 0 16px var(--primary);
     border: 1.5px solid var(--primary);
     transform: translateY(-6px) scale(1.03);
     z-index: 2;
@@ -295,18 +304,9 @@ body {
 }
 
 .badge-oferta {
-    position: absolute;
-    top: 12px;
-    left: 12px;
-    background: linear-gradient(90deg, #ff6600 60%, #fff 100%);
-    color: #fff;
-    padding: 3px 12px;
-    border-radius: 10px;
-    font-size: 0.92rem;
-    font-weight: bold;
-    box-shadow: 0 0 8px #ff6600;
-    letter-spacing: 1px;
-    z-index: 2;
+    background: linear-gradient(90deg, var(--primary) 60%, var(--primary-dark) 100%);
+    color: var(--text);
+    box-shadow: 0 0 8px var(--primary);
 }
 
 /* Botão de compra */
@@ -323,6 +323,7 @@ body {
     box-shadow: 0 0 8px var(--primary-dark);
     transition: background 0.2s, transform 0.1s, box-shadow 0.2s;
 }
+
 .buy-btn:hover,
 .checkout-btn:hover {
     background: var(--primary-dark);
@@ -352,14 +353,14 @@ body {
 
 .product-modal-content,
 .cart-content {
-    background: #fff;
-    color: #222;
+    background: var(--bg-light);
+    color: rgb(252, 249, 249);
     border-radius: 18px;
     padding: 32px 22px 22px 22px;
     min-width: 240px;
     width: 100%;
     max-width: 400px;
-    box-shadow: 0 8px 32px #ff660044;
+    box-shadow: 0 8px 32px var(--primary-dark);
     position: relative;
     text-align: center;
     word-break: break-word;
@@ -534,7 +535,7 @@ textarea:focus {
 /* Footer */
 footer {
     background: var(--bg-light);
-    color: #fff;
+    color: var(--text);
     text-align: center;
     padding: 18px 0 12px 0;
     font-size: 1rem;
@@ -575,6 +576,7 @@ footer {
         font-size: 0.98rem;
     }
 }
+
 /* Modal de agradecimento */
 .thankyou-modal {
     position: fixed;
@@ -593,53 +595,180 @@ footer {
     border: 2px solid var(--primary);
     text-align: center;
 }
+
 @keyframes fadeInOut {
-    0% { opacity: 0; }
-    10% { opacity: 1; }
-    90% { opacity: 1; }
-    100% { opacity: 0; }
+    0% {
+        opacity: 0;
+    }
+
+    10% {
+        opacity: 1;
+    }
+
+    90% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+    }
 }
+
 /* Esconde o header ao rolar */
 .main-header {
-    transition: top 0.35s cubic-bezier(.4,1.6,.6,1), opacity 0.25s;
+    transition: top 0.35s cubic-bezier(.4, 1.6, .6, 1), opacity 0.25s;
 }
+
 .main-header.hide-header {
     top: -120px;
     opacity: 0;
     pointer-events: none;
 }
+
 .banner-destaque {
-  background: linear-gradient(90deg, #ff6600 60%, #fff 100%);
-  color: #fff;
-  text-align: center;
-  font-weight: bold;
-  padding: 12px 0;
-  font-size: 1.1rem;
-  letter-spacing: 1px;
-  box-shadow: 0 2px 8px #ff660033;
-  z-index: 200;
-  position: relative;
+    background: linear-gradient(90deg, var(--primary) 60%, var(--bg-light) 100%);
+    color: #393552;
+    text-align: center;
+    font-weight: bold;
+    padding: 12px 0;
+    font-size: 1.1rem;
+    letter-spacing: 1px;
+    box-shadow: 0 2px 8px var(--primary-dark);
+    z-index: 200;
+    position: relative;
 }
+
 .rating-stars {
-  margin-bottom: 8px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 2px;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2px;
 }
+
 .whatsapp-float {
-  position: fixed;
-  bottom: 24px;
-  right: 24px;
-  z-index: 5000;
-  background: #25d366;
-  border-radius: 50%;
-  padding: 12px;
-  box-shadow: 0 2px 12px #0005;
-  transition: transform 0.2s;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    z-index: 5000;
+    background: #25d366;
+    border-radius: 50%;
+    padding: 12px;
+    box-shadow: 0 2px 12px #0005;
+    transition: transform 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
-.whatsapp-float:hover { transform: scale(1.08);}
-.whatsapp-float img { width: 32px; height: 32px; }
+
+.whatsapp-float:hover {
+    transform: scale(1.08);
+}
+
+.whatsapp-float img {
+    width: 32px;
+    height: 32px;
+}
+.carousel-section {
+    margin: 32px 0;
+    background: var(--bg-light);
+    border-radius: 18px;
+    box-shadow: 0 2px 16px var(--primary-dark);
+    padding: 15px 0;
+    overflow: hidden;
+}
+.glider {
+    display: flex;
+    gap: 24px;
+    align-items: stretch;
+}
+.glider-prev, .glider-next {
+    background: var(--primary);
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    width: 38px;
+    height: 38px;
+    font-size: 1.5rem;
+    cursor: pointer;
+    margin: 0 8px;
+    box-shadow: 0 2px 8px var(--primary-dark);
+    transition: background 0.2s, transform 0.2s;
+}
+.glider-prev:hover, .glider-next:hover {
+    background: var(--primary-dark);
+    transform: scale(1.12);
+}
+.dots {
+    text-align: center;
+    margin-top: 12px;
+}
+.dots button {
+    background: var(--primary);
+    border: none;
+    border-radius: 50%;
+    width: 12px;
+    height: 12px;
+    margin: 0 4px;
+    opacity: 0.5;
+    transition: opacity 0.2s;
+}
+.dots .glider-dot.active {
+    opacity: 1;
+    background: var(--primary-dark);
+}
+.product-card {
+    transition: box-shadow 0.18s, transform 0.18s, border 0.18s;
+    animation: fadeInCard 0.5s;
+}
+@keyframes fadeInCard {
+    from { opacity: 0; transform: scale(0.95);}
+    to { opacity: 1; transform: scale(1);}
+}
+
+.footer-links {
+    margin-bottom: 8px;
+    color: var(--text);
+    font-size: 1rem;
+}
+.footer-links a {
+    color: var(--primary);
+    text-decoration: underline;
+    margin: 0 8px;
+}
+.footer-social {
+    margin-bottom: 8px;
+}
+.footer-social a img {
+    vertical-align: middle;
+    margin: 0 6px;
+    filter: brightness(1.2);
+    transition: filter 0.2s;
+}
+.footer-social a:hover img {
+    filter: brightness(2) drop-shadow(0 0 4px var(--primary));
+}
+.filter-bar {
+    display: flex;
+    gap: 24px;
+    justify-content: center;
+    margin-bottom: 18px;
+    color: var(--text);
+    font-size: 1rem;
+}
+.filter-bar input[type="checkbox"] {
+    accent-color: var(--primary);
+}
+.badge-oferta {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background: linear-gradient(90deg, var(--primary) 60%, var(--primary-dark) 100%);
+    color: #fff;
+    padding: 4px 12px;
+    border-radius: 12px;
+    font-size: 0.95em;
+    font-weight: bold;
+    box-shadow: 0 0 8px var(--primary);
+    z-index: 2;
+}
